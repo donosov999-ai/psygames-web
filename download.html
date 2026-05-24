@@ -240,9 +240,21 @@ footer a:hover { text-decoration: underline; }
   <h1 data-i18n="hero_title"></h1>
   <p data-i18n="hero_desc"></p>
   <span class="version-pill"><span class="green">●</span> <span id="version" data-i18n="version_loading"></span></span>
+
+  <!-- v1.8.1: ГИГАНТСКИЕ hero CTA — выноcим "Профили и цены" из шапки сюда -->
+  <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:26px;">
+    <a href="#downloads" style="background:linear-gradient(135deg,#10b981 0%,#059669 100%);color:#fff;font-weight:800;font-size:16px;padding:16px 28px;border-radius:14px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;box-shadow:0 4px 18px rgba(16,185,129,0.35);transition:transform .15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+      <span style="font-size:22px;">↓</span>
+      <span data-i18n="cta_download_main">Скачать FREE</span>
+    </a>
+    <a href="./profiles.html" style="background:linear-gradient(135deg,#fbbf24 0%,#f97316 100%);color:#1a1a1a;font-weight:800;font-size:16px;padding:16px 28px;border-radius:14px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;box-shadow:0 4px 18px rgba(251,191,36,0.4);transition:transform .15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+      <span style="font-size:22px;">📋</span>
+      <span data-i18n="cta_profiles_main">Профили и цены · от 490₽/год</span>
+    </a>
+  </div>
 </header>
 
-<section class="container">
+<section class="container" id="downloads">
   <h2 data-i18n="dl_title"></h2>
   <p class="sub" data-i18n="dl_sub"></p>
 
@@ -327,6 +339,16 @@ footer a:hover { text-decoration: underline; }
     <div class="prof"><div class="head"><span class="emoji">👩</span><span class="name" data-i18n="prof_women_name"></span></div><p data-i18n="prof_women_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
   </div>
   <p style="margin-top:18px;color:#737373;font-size:13px;" data-i18n="prof_footer"></p>
+
+  <!-- v1.8.1: ГИГАНТСКИЙ CTA после профилей — на отдельную страницу с pricing -->
+  <div style="margin-top:32px;background:linear-gradient(135deg,rgba(251,191,36,0.15) 0%,rgba(249,115,22,0.15) 100%);border:2px solid #fbbf24;border-radius:18px;padding:28px;text-align:center;">
+    <h3 style="font-size:22px;font-weight:800;color:#fff;margin:0 0 8px 0;" data-i18n="cta_box_title">Хочешь подробности?</h3>
+    <p style="color:#cfcfcf;font-size:14px;margin:0 0 18px 0;" data-i18n="cta_box_sub">Отдельная страница: подробный разбор каждого профиля, все 47 упражнений с описанием, цены, пакеты, кнопки «Оформить в Telegram».</p>
+    <a href="./profiles.html" style="background:linear-gradient(135deg,#fbbf24 0%,#f97316 100%);color:#1a1a1a;font-weight:800;font-size:16px;padding:14px 28px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;box-shadow:0 4px 14px rgba(251,191,36,0.4);">
+      <span style="font-size:20px;">📋</span>
+      <span data-i18n="cta_box_btn">Открыть профили и цены</span>
+    </a>
+  </div>
 </section>
 
 <section class="container">
@@ -413,6 +435,13 @@ const I18N = {
     prof_women_name: 'Женщины',
     prof_women_desc: 'Залипательные казуалки: парные картинки, найди отличия, hidden object, судоку, анаграммы. 5-10 мин микро-отдыха.',
     nav_profiles: '📋 Все профили и упражнения',
+    cta_download_main: 'Скачать FREE (без кода)',
+    cta_profiles_main: 'Профили и цены · от 490₽/год',
+    sticky_text: 'Тематические профили от 490₽/год',
+    sticky_btn: '📋 Смотреть цены',
+    cta_box_title: 'Хочешь подробности?',
+    cta_box_sub: 'Отдельная страница: подробный разбор каждого профиля, все 47 упражнений с описанием, цены, пакеты, кнопки «Оформить в Telegram».',
+    cta_box_btn: 'Открыть профили и цены →',
     prof_code_badge: 'мастер-код',
     prof_footer: '🎁 FREE — бесплатно навсегда. Тематические профили — годовая подписка от 490₽/год · оплата картой/СБП через Telegram. <a href="./profiles.html" style="color:#fbbf24;font-weight:700;">📋 Все цены и пакеты →</a>',
     install_title: 'Как установить',
@@ -484,6 +513,13 @@ const I18N = {
     prof_women_name: 'Women',
     prof_women_desc: 'Addictive casual games: memory match, spot-the-difference, hidden object, sudoku, anagrams. 5-10 min micro-break.',
     nav_profiles: '📋 All profiles & exercises',
+    cta_download_main: 'Download FREE (no code)',
+    cta_profiles_main: 'Profiles & pricing · from 490₽/year',
+    sticky_text: 'Themed profiles from 490₽/year',
+    sticky_btn: '📋 See pricing',
+    cta_box_title: 'Want details?',
+    cta_box_sub: 'Separate page: breakdown of each profile, all 47 exercises with descriptions, prices, bundles, «Order via Telegram» buttons.',
+    cta_box_btn: 'Open profiles & pricing →',
     prof_code_badge: 'master code',
     prof_footer: '🎁 FREE — free forever. Themed profiles — yearly subscription from 490₽/year · card / SBP payment via Telegram. <a href="./profiles.html" style="color:#fbbf24;font-weight:700;">📋 All prices and bundles →</a>',
     install_title: 'How to install',
@@ -583,6 +619,31 @@ fetch('https://api.github.com/repos/donosov999-ai/psygames-native/releases/lates
 
 function formatSize(bytes) {
   return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+}
+</script>
+
+<!-- v1.8.1: Sticky bottom-bar — всегда видна при скролле, ссылка на pricing -->
+<div id="sticky-pricing-bar" style="position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-top:2px solid #fbbf24;padding:12px 20px;display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:0 -8px 24px rgba(0,0,0,0.4);">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:20px;">💸</span>
+    <span style="color:#e6e6e6;font-size:14px;font-weight:600;" data-i18n="sticky_text">Тематические профили от 490₽/год</span>
+  </div>
+  <a href="./profiles.html" style="background:linear-gradient(135deg,#fbbf24 0%,#f97316 100%);color:#1a1a1a;font-weight:800;font-size:14px;padding:10px 20px;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:transform .15s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    <span data-i18n="sticky_btn">📋 Смотреть цены</span>
+  </a>
+  <button onclick="document.getElementById('sticky-pricing-bar').style.display='none';localStorage.setItem('psygames_sticky_dismissed','1');" style="background:transparent;border:none;color:rgba(255,255,255,0.4);font-size:18px;cursor:pointer;padding:0 4px;line-height:1;" title="Скрыть">✕</button>
+</div>
+<style>
+body { padding-bottom: 70px; } /* пространство под sticky bar */
+@media (max-width: 600px) {
+  #sticky-pricing-bar { padding: 10px 14px; gap: 10px; }
+  #sticky-pricing-bar span[data-i18n="sticky_text"] { display: none; } /* hide text on mobile */
+}
+</style>
+<script>
+// Скрыть sticky если пользователь его уже закрывал
+if (localStorage.getItem('psygames_sticky_dismissed') === '1') {
+  document.getElementById('sticky-pricing-bar').style.display = 'none';
 }
 </script>
 
