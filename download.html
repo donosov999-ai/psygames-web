@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PsyGames — скачать когнитивные тренажёры</title>
-<meta name="description" content="47 научно-обоснованных когнитивных тренажёров для памяти, внимания, логики и реакции. Для Mac, Windows, Android и в браузере. 14 готовых программ под разные цели.">
-<meta property="og:title" content="PsyGames — когнитивные тренировки">
-<meta property="og:description" content="47 тренажёров под 14 программ: Шахматист, Дети, Скорочтение, NZT-48, Водители, 50+, Предприниматели, ЕГЭ, FREE">
+<title>PsyGames — cognitive training · скачать</title>
+<meta name="description" content="47 cognitive trainers for memory, attention, logic and reaction. For Mac, Windows, Android, browser. 14 ready programs for chess players, kids, speed reading, business.">
+<meta property="og:title" content="PsyGames — cognitive training">
+<meta property="og:description" content="47 trainers, 14 programs: Chess, Kids, Speed Reading, NZT-48, Drivers, 50+, Executives, Students, FREE">
 <meta property="og:type" content="website">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,6 +18,38 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.55;
 }
+
+/* TOP BAR (lang switch) */
+.topbar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  gap: 4px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  padding: 4px;
+  backdrop-filter: blur(8px);
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  letter-spacing: 0.5px;
+}
+.lang-btn.active {
+  background: #fff;
+  color: #000;
+}
+.lang-btn:hover:not(.active) { color: #fff; }
 
 /* HERO */
 .hero {
@@ -75,17 +107,8 @@ body {
 }
 .version-pill .green { color: #34d399; font-size: 8px; }
 
-/* CONTAINER */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* SECTION */
-section {
-  padding: 60px 0;
-}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+section { padding: 60px 0; }
 section h2 {
   font-size: clamp(22px, 3.5vw, 32px);
   font-weight: 800;
@@ -93,18 +116,9 @@ section h2 {
   margin-bottom: 8px;
   letter-spacing: -0.3px;
 }
-section .sub {
-  color: #a3a3a3;
-  font-size: 15px;
-  margin-bottom: 28px;
-}
+section .sub { color: #a3a3a3; font-size: 15px; margin-bottom: 28px; }
 
-/* DOWNLOAD GRID */
-.downloads {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-}
+.downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 .dl-card {
   background: #161616;
   border: 1px solid #262626;
@@ -118,18 +132,14 @@ section .sub {
   transition: border-color .2s, transform .2s, background .2s;
   position: relative;
 }
-.dl-card:hover {
-  border-color: #525252;
-  transform: translateY(-2px);
-  background: #1c1c1c;
-}
+.dl-card:hover { border-color: #525252; transform: translateY(-2px); background: #1c1c1c; }
 .dl-card.highlight {
   border-color: #fbbf24;
   background: linear-gradient(135deg, #1c1c00 0%, #161616 60%);
   box-shadow: 0 0 0 1px #fbbf24;
 }
 .dl-card.highlight::before {
-  content: '👉 Для вашей системы';
+  content: attr(data-for-you);
   position: absolute;
   top: -10px;
   left: 16px;
@@ -153,28 +163,12 @@ section .sub {
   font-weight: 700;
   text-align: center;
   font-size: 14px;
-  transition: background .15s;
 }
 .dl-card.highlight .btn { background: #fbbf24; }
-.dl-card .meta {
-  font-size: 11px;
-  color: #737373;
-  font-family: ui-monospace, "SF Mono", Monaco, monospace;
-}
+.dl-card .meta { font-size: 11px; color: #737373; font-family: ui-monospace, monospace; }
 
-/* CATEGORIES (4 разделa) */
-.cats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-}
-.cat {
-  background: #161616;
-  border: 1px solid #262626;
-  border-radius: 14px;
-  padding: 22px;
-  border-left: 4px solid;
-}
+.cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.cat { background: #161616; border: 1px solid #262626; border-radius: 14px; padding: 22px; border-left: 4px solid; }
 .cat.memory    { border-left-color: #f093fb; }
 .cat.attention { border-left-color: #667eea; }
 .cat.logic     { border-left-color: #a8c0ff; }
@@ -184,18 +178,8 @@ section .sub {
 .cat .count { color: #737373; font-size: 12px; font-family: ui-monospace, monospace; margin-bottom: 10px; }
 .cat ul { list-style: none; font-size: 13px; color: #a3a3a3; line-height: 1.7; }
 
-/* PROFILES */
-.profiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-}
-.prof {
-  background: #161616;
-  border: 1px solid #262626;
-  border-radius: 12px;
-  padding: 16px;
-}
+.profiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.prof { background: #161616; border: 1px solid #262626; border-radius: 12px; padding: 16px; }
 .prof .head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .prof .emoji { font-size: 22px; }
 .prof .name { color: #fff; font-weight: 700; font-size: 14px; }
@@ -213,7 +197,6 @@ section .sub {
 .prof .badge.code { background: #4a3500; color: #fbbf24; }
 .prof p { color: #a3a3a3; font-size: 12px; line-height: 1.5; }
 
-/* INSTALL ACCORDION */
 details {
   background: #161616;
   border: 1px solid #262626;
@@ -221,310 +204,353 @@ details {
   margin-bottom: 10px;
   padding: 0;
 }
-summary {
-  cursor: pointer;
-  padding: 16px 20px;
-  font-weight: 700;
-  color: #fff;
-  list-style: none;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+summary { cursor: pointer; padding: 16px 20px; font-weight: 700; color: #fff; list-style: none; user-select: none; display: flex; align-items: center; gap: 10px; }
 summary::-webkit-details-marker { display: none; }
-summary::after {
-  content: '▾';
-  margin-left: auto;
-  color: #737373;
-  transition: transform .2s;
-}
+summary::after { content: '▾'; margin-left: auto; color: #737373; transition: transform .2s; }
 details[open] summary::after { transform: rotate(180deg); }
-details > div {
-  padding: 0 20px 18px;
-  color: #a3a3a3;
-  font-size: 14px;
-  line-height: 1.7;
-}
+details > div { padding: 0 20px 18px; color: #a3a3a3; font-size: 14px; line-height: 1.7; }
 details ol { padding-left: 22px; }
-details code {
-  background: #262626;
-  color: #fbbf24;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-family: ui-monospace, monospace;
-  font-size: 12px;
-}
+details code { background: #262626; color: #fbbf24; padding: 2px 8px; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 12px; }
 
-/* FOOTER */
-footer {
-  padding: 40px 24px;
-  text-align: center;
-  color: #737373;
-  font-size: 13px;
-  border-top: 1px solid #262626;
-  margin-top: 40px;
-}
+footer { padding: 40px 24px; text-align: center; color: #737373; font-size: 13px; border-top: 1px solid #262626; margin-top: 40px; }
 footer a { color: #ec4899; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
-/* RESPONSIVE */
 @media (max-width: 600px) {
   section { padding: 40px 0; }
   .hero { padding: 50px 20px 40px; }
+  .topbar { top: 12px; right: 12px; }
 }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
+<div class="topbar">
+  <button class="lang-btn" data-lang="ru" type="button">RU</button>
+  <button class="lang-btn" data-lang="en" type="button">EN</button>
+</div>
+
 <header class="hero">
   <div class="logo">🧠 PsyGames</div>
-  <h1>47 когнитивных тренажёров под цели</h1>
-  <p>Память, внимание, логика, скорость и торможение. 14 готовых программ — для шахматистов, детей, скорочтения, бизнеса. Научно-обоснованные парадигмы (Готтман, CANTAB, Shepard-Metzler, Stroop, BART, Iowa).</p>
-  <span class="version-pill"><span class="green">●</span> <span id="version">Загрузка версии...</span></span>
+  <h1 data-i18n="hero_title"></h1>
+  <p data-i18n="hero_desc"></p>
+  <span class="version-pill"><span class="green">●</span> <span id="version" data-i18n="version_loading"></span></span>
 </header>
 
-<!-- DOWNLOAD SECTION -->
 <section class="container">
-  <h2>⬇ Скачать</h2>
-  <p class="sub">Нативные приложения для основных платформ. Все бесплатно для FREE-профиля. Тематические профили (Шахматист, Дети, Скорочтение, и др.) разблокируются мастер-кодом.</p>
+  <h2 data-i18n="dl_title"></h2>
+  <p class="sub" data-i18n="dl_sub"></p>
 
   <div class="downloads">
     <a class="dl-card mac" id="dl-mac" href="https://github.com/donosov999-ai/psygames-native/releases/latest">
       <div class="icon">🍎</div>
       <h3>macOS</h3>
-      <p class="desc">Apple Silicon (M1/M2/M3/M4). Распакуй .tar.gz, перенеси в Applications.</p>
-      <span class="btn">Скачать .app</span>
-      <div class="meta" id="meta-mac">~5.6 МБ</div>
+      <p class="desc" data-i18n="dl_mac_desc"></p>
+      <span class="btn" data-i18n="dl_mac_btn"></span>
+      <div class="meta" id="meta-mac">~5.6 MB</div>
     </a>
     <a class="dl-card win" id="dl-win" href="https://github.com/donosov999-ai/psygames-native/releases/latest">
       <div class="icon">🪟</div>
       <h3>Windows</h3>
-      <p class="desc">10 / 11 · 64-bit. Запусти installer, дальше как обычно.</p>
-      <span class="btn">Скачать .exe</span>
-      <div class="meta" id="meta-win">~3.8 МБ</div>
+      <p class="desc" data-i18n="dl_win_desc"></p>
+      <span class="btn" data-i18n="dl_win_btn"></span>
+      <div class="meta" id="meta-win">~3.8 MB</div>
     </a>
     <a class="dl-card android" id="dl-android" href="https://github.com/donosov999-ai/psygames-native/releases/latest">
       <div class="icon">🤖</div>
       <h3>Android</h3>
-      <p class="desc">7.0 и новее. Подписанный APK — устанавливается напрямую.</p>
-      <span class="btn">Скачать .apk</span>
-      <div class="meta" id="meta-android">~32 МБ</div>
+      <p class="desc" data-i18n="dl_android_desc"></p>
+      <span class="btn" data-i18n="dl_android_btn"></span>
+      <div class="meta" id="meta-android">~32 MB</div>
     </a>
     <a class="dl-card web" id="dl-web" href="./">
       <div class="icon">🌐</div>
-      <h3>Веб-версия</h3>
-      <p class="desc">Без установки, прямо в браузере. На iPhone — «На экран Домой» через Safari.</p>
-      <span class="btn">Открыть</span>
-      <div class="meta">Все платформы</div>
+      <h3 data-i18n="dl_web_title"></h3>
+      <p class="desc" data-i18n="dl_web_desc"></p>
+      <span class="btn" data-i18n="dl_web_btn"></span>
+      <div class="meta" data-i18n="dl_web_meta"></div>
     </a>
   </div>
 </section>
 
-<!-- 4 CATEGORIES -->
 <section class="container">
-  <h2>Что внутри · 4 раздела</h2>
-  <p class="sub">47 игр, каждая — проверенная исследованиями парадигма из когнитивной психологии. Разделены по типу тренируемой функции.</p>
+  <h2 data-i18n="cats_title"></h2>
+  <p class="sub" data-i18n="cats_sub"></p>
 
   <div class="cats">
     <div class="cat memory">
       <div class="ic">🧠</div>
-      <h3>Память</h3>
-      <div class="count">12 игр</div>
-      <ul>
-        <li>Кратковременная (Digit Span, Corsi)</li>
-        <li>Рабочая (N-back, Reading Span, OSpan)</li>
-        <li>Эпизодическая (Story Recall)</li>
-        <li>Ассоциативная (Word Pairs, Mnemonics)</li>
-        <li>Зрительная (Memory Matrix, Picture Pairs)</li>
-      </ul>
+      <h3 data-i18n="cat_memory_name"></h3>
+      <div class="count" data-i18n="cat_memory_count"></div>
+      <ul data-i18n-html="cat_memory_items"></ul>
     </div>
     <div class="cat attention">
       <div class="ic">👁</div>
-      <h3>Внимание</h3>
-      <div class="count">7 игр</div>
-      <ul>
-        <li>Концентрация (Шульте, Корректура)</li>
-        <li>Поиск (Visual Search, Find Differences)</li>
-        <li>Длительное (CPT 4-12 мин)</li>
-        <li>Пространственное (Posner, ANT)</li>
-      </ul>
+      <h3 data-i18n="cat_attention_name"></h3>
+      <div class="count" data-i18n="cat_attention_count"></div>
+      <ul data-i18n-html="cat_attention_items"></ul>
     </div>
     <div class="cat logic">
       <div class="ic">🧩</div>
-      <h3>Логика и принятие решений</h3>
-      <div class="count">14 игр</div>
-      <ul>
-        <li>Планирование (Tower of London, Hanoi)</li>
-        <li>Дедукция (Sudoku, Pattern, SET)</li>
-        <li>Пространственное (Mental Rotation 3D)</li>
-        <li>Переключение правил (Trail, Switching, WCST)</li>
-        <li>Решения под риском (BART, Iowa, PRL)</li>
-        <li>Вербальное (Anagrams, Phonemic Fluency)</li>
-      </ul>
+      <h3 data-i18n="cat_logic_name"></h3>
+      <div class="count" data-i18n="cat_logic_count"></div>
+      <ul data-i18n-html="cat_logic_items"></ul>
     </div>
     <div class="cat action">
       <div class="ic">⚡</div>
-      <h3>Скорость и торможение</h3>
-      <div class="count">14 игр</div>
-      <ul>
-        <li>Торможение (Stroop, Flanker, Go/No-Go, Stop Signal)</li>
-        <li>Скорость реакции (Choice RT, Targets)</li>
-        <li>Скорость обработки (SDMT)</li>
-        <li>Устный счёт (Math Sprint, Counter, Number Bonds)</li>
-        <li>Социальное (RMET — эмоции по глазам)</li>
-      </ul>
+      <h3 data-i18n="cat_action_name"></h3>
+      <div class="count" data-i18n="cat_action_count"></div>
+      <ul data-i18n-html="cat_action_items"></ul>
     </div>
   </div>
 </section>
 
-<!-- 14 PROFILES -->
 <section class="container">
-  <h2>14 готовых программ</h2>
-  <p class="sub">Каждая программа — это подобранный набор из 9 игр под целевую аудиторию. Переключение в Settings. Тематические разблокируются мастер-кодом.</p>
+  <h2 data-i18n="prof_title"></h2>
+  <p class="sub" data-i18n="prof_sub"></p>
 
   <div class="profiles">
-    <div class="prof">
-      <div class="head"><span class="emoji">🎁</span><span class="name">FREE</span></div>
-      <p>9 базовых игр для пробы. По одной из каждого раздела.</p>
-      <span class="badge free">без кода</span>
-    </div>
-    <div class="prof">
-      <div class="head"><span class="emoji">♟</span><span class="name">Шахматист</span></div>
-      <p>Расчёт ходов, spatial reasoning, sustained attention на длинной партии.</p>
-      <span class="badge code">мастер-код</span>
-    </div>
-    <div class="prof">
-      <div class="head"><span class="emoji">🧒</span><span class="name">Дети 7-12</span></div>
-      <p>Короткие сессии, позитивное подкрепление. Для родителей и развивающих центров.</p>
-      <span class="badge code">мастер-код</span>
-    </div>
-    <div class="prof">
-      <div class="head"><span class="emoji">📖</span><span class="name">Скорочтение</span></div>
-      <p>Расширение поля зрения, скорость глаз, удержание текста. Дополнение к курсам.</p>
-      <span class="badge code">мастер-код</span>
-    </div>
-    <div class="prof">
-      <div class="head"><span class="emoji">💊</span><span class="name">NZT-48 полный</span></div>
-      <p>Полная батарея префронталки. Включает Financial Brain Day.</p>
-      <span class="badge code">мастер-код</span>
-    </div>
-    <div class="prof">
-      <div class="head"><span class="emoji">🚗</span><span class="name">Водители</span></div>
-      <p>Внимание, реакция, peripheral. Для автошкол и таксопарков.</p>
-      <span class="badge code">мастер-код</span>
-    </div>
-    <div class="prof">
-      <div class="head"><span class="emoji">👴</span><span class="name">50+ профилактика</span></div>
-      <p>Память + processing speed. Замедление когнитивного старения.</p>
-      <span class="badge code">мастер-код</span>
-    </div>
-    <div class="prof">
-      <div class="head"><span class="emoji">💼</span><span class="name">Предприниматели</span></div>
-      <p>Решения под давлением, risk, multitasking. С Financial Brain Day.</p>
-      <span class="badge code">мастер-код</span>
-    </div>
-    <div class="prof">
-      <div class="head"><span class="emoji">🎓</span><span class="name">Студенты ЕГЭ</span></div>
-      <p>Фокус, память, скорость для подготовки к долгим экзаменам.</p>
-      <span class="badge code">мастер-код</span>
-    </div>
+    <div class="prof"><div class="head"><span class="emoji">🎁</span><span class="name" data-i18n="prof_free_name"></span></div><p data-i18n="prof_free_desc"></p><span class="badge free" data-i18n="prof_free_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">♟</span><span class="name" data-i18n="prof_chess_name"></span></div><p data-i18n="prof_chess_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">🧒</span><span class="name" data-i18n="prof_kids_name"></span></div><p data-i18n="prof_kids_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">📖</span><span class="name" data-i18n="prof_reading_name"></span></div><p data-i18n="prof_reading_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">💊</span><span class="name" data-i18n="prof_nzt_name"></span></div><p data-i18n="prof_nzt_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">🚗</span><span class="name" data-i18n="prof_drivers_name"></span></div><p data-i18n="prof_drivers_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">👴</span><span class="name" data-i18n="prof_seniors_name"></span></div><p data-i18n="prof_seniors_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">💼</span><span class="name" data-i18n="prof_execs_name"></span></div><p data-i18n="prof_execs_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">🎓</span><span class="name" data-i18n="prof_students_name"></span></div><p data-i18n="prof_students_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
   </div>
-  <p style="margin-top:18px;color:#737373;font-size:13px;">+ 5 личных профилей (Денис / Алекс / Валя / Юля / Гость) — переключаются в Settings, без кода.</p>
+  <p style="margin-top:18px;color:#737373;font-size:13px;" data-i18n="prof_footer"></p>
 </section>
 
-<!-- INSTALL HINTS -->
 <section class="container">
-  <h2>Как установить</h2>
-  <p class="sub">Платформа-specific нюансы при первом запуске.</p>
+  <h2 data-i18n="install_title"></h2>
+  <p class="sub" data-i18n="install_sub"></p>
 
   <details>
-    <summary>🍎 macOS (Apple Silicon)</summary>
-    <div>
-      <ol>
-        <li>Распакуй <code>PsyGames-macos-arm64.tar.gz</code> (двойной клик в Finder)</li>
-        <li>Перенеси <code>PsyGames.app</code> в <code>/Applications</code></li>
-        <li>Первый запуск: <strong>правый клик → Открыть → Открыть всё равно</strong> (обход Gatekeeper, приложение не подписано Apple Developer cert)</li>
-        <li>Дальше открывается как обычное приложение из Launchpad / Dock</li>
-      </ol>
-      <p style="margin-top:10px;">⚠ Если установлена старая версия — сначала <code>Cmd+Q</code> на текущей, потом замени в /Applications, иначе запустится cached.</p>
-    </div>
+    <summary data-i18n="install_mac_title"></summary>
+    <div data-i18n-html="install_mac_body"></div>
   </details>
-
   <details>
-    <summary>🪟 Windows (10 / 11)</summary>
-    <div>
-      <ol>
-        <li>Скачай <code>PsyGames_<version>_x64-setup.exe</code> (NSIS-installer) или <code>.msi</code> на выбор</li>
-        <li>Запусти. Windows SmartScreen может предупредить — <strong>«Подробнее» → «Выполнить в любом случае»</strong> (не подписано Microsoft cert)</li>
-        <li>Установится в <code>%APPDATA%\Local\PsyGames\</code>, ярлык в меню Пуск</li>
-        <li>Требуется WebView2 Runtime — обычно установлен на Windows 10+ из коробки. Если нет — <a href="https://developer.microsoft.com/microsoft-edge/webview2/" style="color:#fbbf24">скачать здесь</a></li>
-      </ol>
-    </div>
+    <summary data-i18n="install_win_title"></summary>
+    <div data-i18n-html="install_win_body"></div>
   </details>
-
   <details>
-    <summary>🤖 Android (7.0+)</summary>
-    <div>
-      <ol>
-        <li>Скачай <code>PsyGames-android.apk</code> на телефон</li>
-        <li>Открой файл — Android спросит разрешение на установку из неизвестных источников. Разреши</li>
-        <li>Тап «Установить»</li>
-        <li>Запускай из app drawer как обычно</li>
-      </ol>
-      <p style="margin-top:10px;">📝 APK подписан, повторные обновления сохраняют данные. Не доступен в Google Play — установка только через APK.</p>
-    </div>
+    <summary data-i18n="install_android_title"></summary>
+    <div data-i18n-html="install_android_body"></div>
   </details>
-
   <details>
-    <summary>🌐 Веб-версия и iOS (PWA)</summary>
-    <div>
-      <ol>
-        <li>Открой <a href="./" style="color:#fbbf24">https://donosov999-ai.github.io/psygames-web/</a> в браузере (любом)</li>
-        <li><strong>На iPhone:</strong> Safari → «Поделиться» → «На экран Домой» — иконка PsyGames появится как обычное приложение</li>
-        <li>На десктопе работает прямо во вкладке. Прогресс хранится в localStorage браузера.</li>
-      </ol>
-    </div>
+    <summary data-i18n="install_web_title"></summary>
+    <div data-i18n-html="install_web_body"></div>
   </details>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>
-    Все версии и changelog → <a href="https://github.com/donosov999-ai/psygames-native/releases">GitHub Releases</a><br>
-    Что нового → <a href="https://github.com/donosov999-ai/psygames-native/blob/main/CHANGELOG.md">CHANGELOG.md</a><br>
-    Исходный код → <a href="https://github.com/donosov999-ai/psygames-native">psygames-native</a>
-  </p>
-  <p style="margin-top:14px;">Created by Denis Onosov (ODV999) · 2026 · Личное использование</p>
+  <p data-i18n-html="footer_links"></p>
+  <p style="margin-top:14px;" data-i18n="footer_author"></p>
 </footer>
 
 <script>
-// ─── Auto-detect OS + highlight relevant download ──────────────────────
-const ua = navigator.userAgent;
-let detectedOs = null;
-if (/Macintosh|Mac OS X/.test(ua) && !/iPhone|iPad/.test(ua)) detectedOs = 'mac';
-else if (/Windows/.test(ua)) detectedOs = 'win';
-else if (/Android/.test(ua)) detectedOs = 'android';
-else if (/iPhone|iPad|iPod/.test(ua)) detectedOs = 'web';   // iOS → PWA
-if (detectedOs) {
-  const el = document.getElementById('dl-' + detectedOs);
-  if (el) el.classList.add('highlight');
+const I18N = {
+  ru: {
+    for_you: '👉 Для вашей системы',
+    hero_title: '47 когнитивных тренажёров под цели',
+    hero_desc: 'Память, внимание, логика, скорость и торможение. 14 готовых программ — для шахматистов, детей, скорочтения, бизнеса. Научно-обоснованные парадигмы (Готтман, CANTAB, Shepard-Metzler, Stroop, BART, Iowa).',
+    version_loading: 'Загрузка версии...',
+    dl_title: '⬇ Скачать',
+    dl_sub: 'Нативные приложения для основных платформ. Всё бесплатно для FREE-профиля. Тематические профили (Шахматист, Дети, Скорочтение и др.) разблокируются мастер-кодом.',
+    dl_mac_desc: 'Apple Silicon (M1/M2/M3/M4). Распакуй .tar.gz, перенеси в Applications.',
+    dl_mac_btn: 'Скачать .app',
+    dl_win_desc: '10 / 11 · 64-bit. Запусти installer, дальше как обычно.',
+    dl_win_btn: 'Скачать .exe',
+    dl_android_desc: '7.0 и новее. Подписанный APK — устанавливается напрямую.',
+    dl_android_btn: 'Скачать .apk',
+    dl_web_title: 'Веб-версия',
+    dl_web_desc: 'Без установки, прямо в браузере. На iPhone — «На экран Домой» через Safari.',
+    dl_web_btn: 'Открыть',
+    dl_web_meta: 'Все платформы',
+    cats_title: 'Что внутри · 4 раздела',
+    cats_sub: '47 игр, каждая — проверенная исследованиями парадигма из когнитивной психологии. Разделены по типу тренируемой функции.',
+    cat_memory_name: 'Память',
+    cat_memory_count: '12 игр',
+    cat_memory_items: '<li>Кратковременная (Digit Span, Corsi)</li><li>Рабочая (N-back, Reading Span, OSpan)</li><li>Эпизодическая (Story Recall)</li><li>Ассоциативная (Word Pairs, Mnemonics)</li><li>Зрительная (Memory Matrix, Picture Pairs)</li>',
+    cat_attention_name: 'Внимание',
+    cat_attention_count: '7 игр',
+    cat_attention_items: '<li>Концентрация (Шульте, Корректура)</li><li>Поиск (Visual Search, Find Differences)</li><li>Длительное (CPT 4-12 мин)</li><li>Пространственное (Posner, ANT)</li>',
+    cat_logic_name: 'Логика и принятие решений',
+    cat_logic_count: '14 игр',
+    cat_logic_items: '<li>Планирование (Tower of London, Hanoi)</li><li>Дедукция (Sudoku, Pattern, SET)</li><li>Пространственное (Mental Rotation 3D)</li><li>Переключение правил (Trail, Switching, WCST)</li><li>Решения под риском (BART, Iowa, PRL)</li><li>Вербальное (Anagrams, Phonemic Fluency)</li>',
+    cat_action_name: 'Скорость и торможение',
+    cat_action_count: '14 игр',
+    cat_action_items: '<li>Торможение (Stroop, Flanker, Go/No-Go, Stop Signal)</li><li>Скорость реакции (Choice RT, Targets)</li><li>Скорость обработки (SDMT)</li><li>Устный счёт (Math Sprint, Counter, Number Bonds)</li><li>Социальное (RMET — эмоции по глазам)</li>',
+    prof_title: '14 готовых программ',
+    prof_sub: 'Каждая программа — это подобранный набор из 9 игр под целевую аудиторию. Переключение в Settings. Тематические разблокируются мастер-кодом.',
+    prof_free_name: 'FREE',
+    prof_free_desc: '9 базовых игр для пробы. По одной из каждого раздела.',
+    prof_free_badge: 'без кода',
+    prof_chess_name: 'Шахматист',
+    prof_chess_desc: 'Расчёт ходов, spatial reasoning, sustained attention на длинной партии.',
+    prof_kids_name: 'Дети 7-12',
+    prof_kids_desc: 'Короткие сессии, позитивное подкрепление. Для родителей и развивающих центров.',
+    prof_reading_name: 'Скорочтение',
+    prof_reading_desc: 'Расширение поля зрения, скорость глаз, удержание текста. Дополнение к курсам.',
+    prof_nzt_name: 'NZT-48 полный',
+    prof_nzt_desc: 'Полная батарея префронталки. Включает Financial Brain Day.',
+    prof_drivers_name: 'Водители',
+    prof_drivers_desc: 'Внимание, реакция, peripheral. Для автошкол и таксопарков.',
+    prof_seniors_name: '50+ профилактика',
+    prof_seniors_desc: 'Память + processing speed. Замедление когнитивного старения.',
+    prof_execs_name: 'Предприниматели',
+    prof_execs_desc: 'Решения под давлением, risk, multitasking. С Financial Brain Day.',
+    prof_students_name: 'Студенты ЕГЭ',
+    prof_students_desc: 'Фокус, память, скорость для подготовки к долгим экзаменам.',
+    prof_code_badge: 'мастер-код',
+    prof_footer: '+ 5 личных профилей (Денис / Алекс / Валя / Юля / Гость) — переключаются в Settings, без кода.',
+    install_title: 'Как установить',
+    install_sub: 'Платформа-specific нюансы при первом запуске.',
+    install_mac_title: '🍎 macOS (Apple Silicon)',
+    install_mac_body: '<ol><li>Распакуй <code>PsyGames-macos-arm64.tar.gz</code> (двойной клик в Finder)</li><li>Перенеси <code>PsyGames.app</code> в <code>/Applications</code></li><li>Первый запуск: <strong>правый клик → Открыть → Открыть всё равно</strong> (обход Gatekeeper, приложение не подписано Apple Developer cert)</li><li>Дальше открывается как обычное приложение из Launchpad / Dock</li></ol><p style="margin-top:10px;">⚠ Если установлена старая версия — сначала <code>Cmd+Q</code> на текущей, потом замени в /Applications, иначе запустится cached.</p>',
+    install_win_title: '🪟 Windows (10 / 11)',
+    install_win_body: '<ol><li>Скачай <code>PsyGames_&lt;version&gt;_x64-setup.exe</code> (NSIS-installer) или <code>.msi</code> на выбор</li><li>Запусти. Windows SmartScreen может предупредить — <strong>«Подробнее» → «Выполнить в любом случае»</strong> (не подписано Microsoft cert)</li><li>Установится в <code>%APPDATA%\\Local\\PsyGames\\</code>, ярлык в меню Пуск</li><li>Требуется WebView2 Runtime — обычно установлен на Windows 10+ из коробки. Если нет — <a href="https://developer.microsoft.com/microsoft-edge/webview2/" style="color:#fbbf24">скачать здесь</a></li></ol>',
+    install_android_title: '🤖 Android (7.0+)',
+    install_android_body: '<ol><li>Скачай <code>PsyGames-android.apk</code> на телефон</li><li>Открой файл — Android спросит разрешение на установку из неизвестных источников. Разреши</li><li>Тап «Установить»</li><li>Запускай из app drawer как обычно</li></ol><p style="margin-top:10px;">📝 APK подписан, повторные обновления сохраняют данные. Не доступен в Google Play — установка только через APK.</p>',
+    install_web_title: '🌐 Веб-версия и iOS (PWA)',
+    install_web_body: '<ol><li>Открой <a href="./" style="color:#fbbf24">https://donosov999-ai.github.io/psygames-web/</a> в браузере (любом)</li><li><strong>На iPhone:</strong> Safari → «Поделиться» → «На экран Домой» — иконка PsyGames появится как обычное приложение</li><li>На десктопе работает прямо во вкладке. Прогресс хранится в localStorage браузера.</li></ol>',
+    footer_links: 'Все версии и changelog → <a href="https://github.com/donosov999-ai/psygames-native/releases">GitHub Releases</a><br>Что нового → <a href="https://github.com/donosov999-ai/psygames-native/blob/main/CHANGELOG.md">CHANGELOG.md</a><br>Исходный код → <a href="https://github.com/donosov999-ai/psygames-native">psygames-native</a>',
+    footer_author: 'Created by Denis Onosov (ODV999) · 2026 · Личное использование',
+  },
+
+  en: {
+    for_you: '👉 Detected for your OS',
+    hero_title: '47 cognitive trainers tailored to goals',
+    hero_desc: 'Memory, attention, logic, speed and inhibition. 14 ready-made programs — for chess players, kids, speed reading, business. Evidence-based paradigms (Gottman, CANTAB, Shepard-Metzler, Stroop, BART, Iowa).',
+    version_loading: 'Loading version...',
+    dl_title: '⬇ Download',
+    dl_sub: 'Native apps for major platforms. Free for the FREE profile. Themed profiles (Chess, Kids, Speed Reading, etc.) unlock with a master code.',
+    dl_mac_desc: 'Apple Silicon (M1/M2/M3/M4). Unpack the .tar.gz, drag into Applications.',
+    dl_mac_btn: 'Download .app',
+    dl_win_desc: '10 / 11 · 64-bit. Run the installer, the rest is standard.',
+    dl_win_btn: 'Download .exe',
+    dl_android_desc: '7.0 and up. Signed APK — installs directly.',
+    dl_android_btn: 'Download .apk',
+    dl_web_title: 'Web version',
+    dl_web_desc: 'No install, runs right in the browser. On iPhone — "Add to Home Screen" via Safari.',
+    dl_web_btn: 'Open',
+    dl_web_meta: 'All platforms',
+    cats_title: 'What\'s inside · 4 categories',
+    cats_sub: '47 games, each a research-validated paradigm from cognitive psychology. Grouped by the function they train.',
+    cat_memory_name: 'Memory',
+    cat_memory_count: '12 games',
+    cat_memory_items: '<li>Short-term (Digit Span, Corsi)</li><li>Working (N-back, Reading Span, OSpan)</li><li>Episodic (Story Recall)</li><li>Associative (Word Pairs, Mnemonics)</li><li>Visual (Memory Matrix, Picture Pairs)</li>',
+    cat_attention_name: 'Attention',
+    cat_attention_count: '7 games',
+    cat_attention_items: '<li>Concentration (Schulte, Proofreading)</li><li>Search (Visual Search, Find Differences)</li><li>Sustained (CPT 4-12 min)</li><li>Spatial (Posner, ANT)</li>',
+    cat_logic_name: 'Logic & decision making',
+    cat_logic_count: '14 games',
+    cat_logic_items: '<li>Planning (Tower of London, Hanoi)</li><li>Deduction (Sudoku, Pattern, SET)</li><li>Spatial (Mental Rotation 3D)</li><li>Rule-switching (Trail Making, Switching, WCST)</li><li>Decisions under risk (BART, Iowa, PRL)</li><li>Verbal (Anagrams, Phonemic Fluency)</li>',
+    cat_action_name: 'Speed & inhibition',
+    cat_action_count: '14 games',
+    cat_action_items: '<li>Inhibition (Stroop, Flanker, Go/No-Go, Stop Signal)</li><li>Reaction time (Choice RT, Targets)</li><li>Processing speed (SDMT)</li><li>Mental math (Math Sprint, Counter, Number Bonds)</li><li>Social (RMET — emotion from eyes)</li>',
+    prof_title: '14 ready-made programs',
+    prof_sub: 'Each program is a curated set of 9 games for the target audience. Switch in Settings. Themed ones unlock with a master code.',
+    prof_free_name: 'FREE',
+    prof_free_desc: '9 basic games to try. One from each category.',
+    prof_free_badge: 'no code',
+    prof_chess_name: 'Chess player',
+    prof_chess_desc: 'Move calculation, spatial reasoning, sustained attention through long games.',
+    prof_kids_name: 'Kids 7-12',
+    prof_kids_desc: 'Short sessions, positive reinforcement. For parents and developmental centres.',
+    prof_reading_name: 'Speed reading',
+    prof_reading_desc: 'Visual field expansion, eye speed, text retention. Companion to courses.',
+    prof_nzt_name: 'NZT-48 full',
+    prof_nzt_desc: 'Full prefrontal cortex battery. Includes Financial Brain Day.',
+    prof_drivers_name: 'Drivers',
+    prof_drivers_desc: 'Attention, reaction, peripheral processing. For driving schools and fleets.',
+    prof_seniors_name: '50+ prevention',
+    prof_seniors_desc: 'Memory + processing speed. Slows cognitive aging.',
+    prof_execs_name: 'Executives',
+    prof_execs_desc: 'Decisions under pressure, risk, multitasking. Includes Financial Brain Day.',
+    prof_students_name: 'Exam students',
+    prof_students_desc: 'Focus, memory, speed for long-exam preparation.',
+    prof_code_badge: 'master code',
+    prof_footer: '+ 5 personal profiles (Denis / Alex / Valya / Yulya / Guest) — switch in Settings, no code needed.',
+    install_title: 'How to install',
+    install_sub: 'Platform-specific first-launch notes.',
+    install_mac_title: '🍎 macOS (Apple Silicon)',
+    install_mac_body: '<ol><li>Unpack <code>PsyGames-macos-arm64.tar.gz</code> (double-click in Finder)</li><li>Move <code>PsyGames.app</code> to <code>/Applications</code></li><li>First launch: <strong>right click → Open → Open anyway</strong> (Gatekeeper bypass — app is not signed with an Apple Developer cert)</li><li>After that, opens like any normal app from Launchpad / Dock</li></ol><p style="margin-top:10px;">⚠ If an older version is installed — <code>Cmd+Q</code> the current one first, then replace it in /Applications, otherwise the cached version launches.</p>',
+    install_win_title: '🪟 Windows (10 / 11)',
+    install_win_body: '<ol><li>Download <code>PsyGames_&lt;version&gt;_x64-setup.exe</code> (NSIS installer) or <code>.msi</code> — your choice</li><li>Run it. Windows SmartScreen may warn — <strong>"More info" → "Run anyway"</strong> (not signed with a Microsoft cert)</li><li>Installs to <code>%APPDATA%\\Local\\PsyGames\\</code>, shortcut in Start menu</li><li>Requires WebView2 Runtime — usually pre-installed on Windows 10+. If not — <a href="https://developer.microsoft.com/microsoft-edge/webview2/" style="color:#fbbf24">download here</a></li></ol>',
+    install_android_title: '🤖 Android (7.0+)',
+    install_android_body: '<ol><li>Download <code>PsyGames-android.apk</code> to your phone</li><li>Open the file — Android will ask permission to install from unknown sources. Allow it</li><li>Tap "Install"</li><li>Launch from app drawer as usual</li></ol><p style="margin-top:10px;">📝 APK is signed, future updates preserve your data. Not on Google Play — installation via APK only.</p>',
+    install_web_title: '🌐 Web version and iOS (PWA)',
+    install_web_body: '<ol><li>Open <a href="./" style="color:#fbbf24">https://donosov999-ai.github.io/psygames-web/</a> in any browser</li><li><strong>On iPhone:</strong> Safari → Share → "Add to Home Screen" — the PsyGames icon appears like a normal app</li><li>On desktop just runs in a tab. Progress lives in browser localStorage.</li></ol>',
+    footer_links: 'All versions and changelog → <a href="https://github.com/donosov999-ai/psygames-native/releases">GitHub Releases</a><br>What\'s new → <a href="https://github.com/donosov999-ai/psygames-native/blob/main/CHANGELOG.md">CHANGELOG.md</a><br>Source code → <a href="https://github.com/donosov999-ai/psygames-native">psygames-native</a>',
+    footer_author: 'Created by Denis Onosov (ODV999) · 2026 · Personal use',
+  },
+};
+
+function pickLang() {
+  try {
+    const saved = localStorage.getItem('psygames_lang');
+    if (saved === 'ru' || saved === 'en') return saved;
+  } catch {}
+  const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+  return nav.startsWith('ru') ? 'ru' : 'en';
 }
 
-// ─── Load latest release info from GitHub API ──────────────────────────
+let currentLang = pickLang();
+
+function applyLang(lang) {
+  currentLang = lang;
+  const dict = I18N[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-html');
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('.dl-card').forEach((el) => {
+    el.setAttribute('data-for-you', dict.for_you);
+  });
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  try { localStorage.setItem('psygames_lang', lang); } catch {}
+}
+
+function detectOsAndHighlight() {
+  const ua = navigator.userAgent;
+  let os = null;
+  if (/Macintosh|Mac OS X/.test(ua) && !/iPhone|iPad/.test(ua)) os = 'mac';
+  else if (/Windows/.test(ua)) os = 'win';
+  else if (/Android/.test(ua)) os = 'android';
+  else if (/iPhone|iPad|iPod/.test(ua)) os = 'web';
+  if (os) {
+    const el = document.getElementById('dl-' + os);
+    if (el) el.classList.add('highlight');
+  }
+}
+
+applyLang(currentLang);
+detectOsAndHighlight();
+
+document.querySelectorAll('.lang-btn').forEach((btn) => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
 fetch('https://api.github.com/repos/donosov999-ai/psygames-native/releases/latest')
   .then((r) => r.ok ? r.json() : Promise.reject(r.status))
   .then((data) => {
+    const dateLocale = currentLang === 'ru' ? 'ru-RU' : 'en-US';
     document.getElementById('version').textContent =
-      data.tag_name + ' · ' + new Date(data.published_at).toLocaleDateString('ru-RU');
-
-    // Find assets and rewire download links to direct file URLs
+      data.tag_name + ' · ' + new Date(data.published_at).toLocaleDateString(dateLocale);
     const findAsset = (pattern) => data.assets.find((a) => pattern.test(a.name));
     const macAsset = findAsset(/macos.*\.tar\.gz$/);
     const winExeAsset = findAsset(/setup\.exe$/);
     const apkAsset = findAsset(/\.apk$/);
-
     if (macAsset) {
       document.getElementById('dl-mac').href = macAsset.browser_download_url;
       document.getElementById('meta-mac').textContent = formatSize(macAsset.size);
@@ -539,12 +565,12 @@ fetch('https://api.github.com/repos/donosov999-ai/psygames-native/releases/lates
     }
   })
   .catch((err) => {
-    document.getElementById('version').textContent = 'Перейти на GitHub';
+    document.getElementById('version').textContent = currentLang === 'ru' ? 'Перейти на GitHub' : 'Open GitHub';
     console.warn('Could not fetch latest release:', err);
   });
 
 function formatSize(bytes) {
-  return (bytes / 1024 / 1024).toFixed(1) + ' МБ';
+  return (bytes / 1024 / 1024).toFixed(1) + ' MB';
 }
 </script>
 
