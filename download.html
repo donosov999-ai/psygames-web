@@ -331,12 +331,14 @@ footer a:hover { text-decoration: underline; }
     <div class="prof"><div class="head"><span class="emoji">♟</span><span class="name" data-i18n="prof_chess_name"></span></div><p data-i18n="prof_chess_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
     <div class="prof"><div class="head"><span class="emoji">🧒</span><span class="name" data-i18n="prof_kids_name"></span></div><p data-i18n="prof_kids_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
     <div class="prof"><div class="head"><span class="emoji">📖</span><span class="name" data-i18n="prof_reading_name"></span></div><p data-i18n="prof_reading_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <!-- v1.13.0: Women card теперь Микро-релакс (нейтральное название) -->
+    <!-- (карточка сохранена ниже как women, просто переименована) -->
     <div class="prof"><div class="head"><span class="emoji">💊</span><span class="name" data-i18n="prof_nzt_name"></span></div><p data-i18n="prof_nzt_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
     <div class="prof"><div class="head"><span class="emoji">⚡</span><span class="name" data-i18n="prof_drivers_name"></span></div><p data-i18n="prof_drivers_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
     <div class="prof"><div class="head"><span class="emoji">👴</span><span class="name" data-i18n="prof_seniors_name"></span></div><p data-i18n="prof_seniors_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
     <div class="prof"><div class="head"><span class="emoji">💼</span><span class="name" data-i18n="prof_execs_name"></span></div><p data-i18n="prof_execs_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
     <div class="prof"><div class="head"><span class="emoji">🎓</span><span class="name" data-i18n="prof_students_name"></span></div><p data-i18n="prof_students_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
-    <div class="prof"><div class="head"><span class="emoji">👩</span><span class="name" data-i18n="prof_women_name"></span></div><p data-i18n="prof_women_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
+    <div class="prof"><div class="head"><span class="emoji">🌸</span><span class="name" data-i18n="prof_women_name"></span></div><p data-i18n="prof_women_desc"></p><span class="badge code" data-i18n="prof_code_badge"></span></div>
   </div>
   <p style="margin-top:18px;color:#737373;font-size:13px;" data-i18n="prof_footer"></p>
 
@@ -420,7 +422,7 @@ const I18N = {
     prof_chess_desc: 'Расчёт ходов, spatial reasoning, sustained attention на длинной партии.',
     prof_kids_name: 'Дети 7-12',
     prof_kids_desc: 'Короткие сессии, позитивное подкрепление. Для родителей и развивающих центров.',
-    prof_reading_name: 'Скорочтение',
+    prof_reading_name: 'Скорочтение PRO',
     prof_reading_desc: 'Расширение поля зрения, скорость глаз, удержание текста. Дополнение к курсам.',
     prof_nzt_name: 'NZT-48 полный',
     prof_nzt_desc: 'Полная батарея префронталки. Включает Financial Brain Day.',
@@ -430,10 +432,10 @@ const I18N = {
     prof_seniors_desc: 'Память + processing speed. Замедление когнитивного старения.',
     prof_execs_name: 'Предприниматели',
     prof_execs_desc: 'Решения под давлением, risk, multitasking. С Financial Brain Day.',
-    prof_students_name: 'Студенты ЕГЭ',
-    prof_students_desc: 'Фокус, память, скорость для подготовки к долгим экзаменам.',
-    prof_women_name: 'Женщины',
-    prof_women_desc: 'Залипательные казуалки: парные картинки, найди отличия, hidden object, судоку, анаграммы. 5-10 мин микро-отдыха.',
+    prof_students_name: 'Студенты PRO',
+    prof_students_desc: 'Фокус · память · скорость · подготовка к ЕГЭ, GMAT, GRE, IELTS, TOEFL, SAT.',
+    prof_women_name: 'Микро-релакс',
+    prof_women_desc: 'Залипательные казуалки для микро-отдыха: парные картинки, отличия, hidden object, судоку. 5-10 мин.',
     nav_profiles: '📋 Все профили и упражнения',
     cta_download_main: 'Скачать FREE (без кода)',
     cta_profiles_main: 'Профили и цены · от 490₽/год',
@@ -498,7 +500,7 @@ const I18N = {
     prof_chess_desc: 'Move calculation, spatial reasoning, sustained attention through long games.',
     prof_kids_name: 'Kids 7-12',
     prof_kids_desc: 'Short sessions, positive reinforcement. For parents and developmental centres.',
-    prof_reading_name: 'Speed reading',
+    prof_reading_name: 'Speedreading PRO',
     prof_reading_desc: 'Visual field expansion, eye speed, text retention. Companion to courses.',
     prof_nzt_name: 'NZT-48 full',
     prof_nzt_desc: 'Full prefrontal cortex battery. Includes Financial Brain Day.',
@@ -508,10 +510,10 @@ const I18N = {
     prof_seniors_desc: 'Memory + processing speed. Slows cognitive aging.',
     prof_execs_name: 'Executives',
     prof_execs_desc: 'Decisions under pressure, risk, multitasking. Includes Financial Brain Day.',
-    prof_students_name: 'Exam students',
-    prof_students_desc: 'Focus, memory, speed for long-exam preparation.',
-    prof_women_name: 'Women',
-    prof_women_desc: 'Addictive casual games: memory match, spot-the-difference, hidden object, sudoku, anagrams. 5-10 min micro-break.',
+    prof_students_name: 'Students PRO',
+    prof_students_desc: 'Focus · memory · speed · prep for GMAT, GRE, IELTS, TOEFL, SAT, ЕГЭ.',
+    prof_women_name: 'Mental break',
+    prof_women_desc: 'Addictive casual trainers for mental break: memory match, spot-the-difference, hidden object, sudoku. 5-10 min.',
     nav_profiles: '📋 All profiles & exercises',
     cta_download_main: 'Download FREE (no code)',
     cta_profiles_main: 'Profiles & pricing · from 490₽/year',
