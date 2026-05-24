@@ -409,13 +409,23 @@ footer {
       <a href="./profiles.html" class="active">Профили и упражнения</a>
     </div>
   </div>
-  <a href="./download.html" class="topnav-cta">↓ Скачать приложение</a>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <!-- v1.9.1: Quick language switch (RU/EN auto-translate via Google) -->
+    <div id="lang-switch" style="display:flex;gap:2px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:3px;">
+      <button onclick="setLang('ru')" id="lang-ru" class="lang-btn-pf" style="background:#fff;color:#000;border:none;font-size:11px;font-weight:700;padding:5px 11px;border-radius:100px;cursor:pointer;">RU</button>
+      <button onclick="setLang('en')" id="lang-en" class="lang-btn-pf" style="background:transparent;color:rgba(255,255,255,0.6);border:none;font-size:11px;font-weight:700;padding:5px 11px;border-radius:100px;cursor:pointer;">EN</button>
+    </div>
+    <a href="./download.html" class="topnav-cta">↓ Скачать приложение</a>
+  </div>
 </nav>
+
+<!-- Google Translate hidden widget (рендерит select, мы его прячем) -->
+<div id="google_translate_element" style="display:none;"></div>
 
 <!-- HERO -->
 <section class="hero">
   <h1>Все профили и упражнения</h1>
-  <p class="sub">11 готовых программ под целевую аудиторию · 47 научно-обоснованных когнитивных тренажёров. Выбери профиль под себя — получи код доступа лично у Дениса в Telegram.</p>
+  <p class="sub">11 готовых программ под целевую аудиторию · 48 научно-обоснованных когнитивных тренажёров. Выбери профиль под себя — получи код доступа лично у Дениса в Telegram.</p>
   <div class="stats">
     <div class="stat"><span class="stat-num">11</span><span class="stat-label">профилей</span></div>
     <div class="stat"><span class="stat-num">48</span><span class="stat-label">упражнений</span></div>
@@ -1011,6 +1021,77 @@ document.querySelectorAll('.buy-bundle-btn').forEach(btn => {
   btn.target = '_blank';
   btn.rel = 'noopener';
 });
+
+// ─── v1.9.1: i18n via Google Translate (quick MVP for non-RU users) ────
+// Why: profiles.html не имеет нативного i18n (как download.html), а это
+// большая страница с 1000+ строк контента. Полный ручной перевод = неделя
+// работы. Google Translate widget = инстант + 100+ языков, качество ~90%.
+// При желании заменить на нативные data-i18n + dict — отдельный спринт.
+
+// Init Google Translate (вставляем script dynamically чтобы не блочить рендер)
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'ru',
+    includedLanguages: 'en,es,fr,de,zh-CN,ja,ko,ar,tr,pl,uk',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+  }, 'google_translate_element');
+
+  // Если URL ?lang=en — применить
+  const urlParams = new URLSearchParams(window.location.search);
+  const forcedLang = urlParams.get('lang') || localStorage.getItem('psygames_pf_lang');
+  if (forcedLang === 'en') setLang('en', true);
+  else if (!forcedLang) {
+    // Авто: если браузер не русский — предложить EN
+    const browserLang = (navigator.language || 'en').slice(0, 2);
+    if (browserLang !== 'ru') {
+      setTimeout(() => setLang('en'), 400); // дождаться init виджета
+    }
+  }
+}
+
+// Динамическая загрузка скрипта Google Translate
+(function () {
+  const s = document.createElement('script');
+  s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  s.async = true;
+  document.head.appendChild(s);
+})();
+
+// Скрываем баннер Google ("Powered by Google" + top frame) — он навязчив
+const hideGtStyle = document.createElement('style');
+hideGtStyle.textContent = `
+  .goog-te-banner-frame, .skiptranslate { display: none !important; }
+  body { top: 0 !important; }
+  .goog-tooltip, .goog-tooltip:hover { display: none !important; }
+  .goog-text-highlight { background: none !important; box-shadow: none !important; }
+  #google_translate_element { display: none !important; }
+`;
+document.head.appendChild(hideGtStyle);
+
+// Manual switch RU/EN — программно меняет язык через виджет
+function setLang(lang, silent) {
+  if (!silent) localStorage.setItem('psygames_pf_lang', lang);
+  const ruBtn = document.getElementById('lang-ru');
+  const enBtn = document.getElementById('lang-en');
+  if (ruBtn && enBtn) {
+    ruBtn.style.background = lang === 'ru' ? '#fff' : 'transparent';
+    ruBtn.style.color = lang === 'ru' ? '#000' : 'rgba(255,255,255,0.6)';
+    enBtn.style.background = lang === 'en' ? '#fff' : 'transparent';
+    enBtn.style.color = lang === 'en' ? '#000' : 'rgba(255,255,255,0.6)';
+  }
+  // Находим dropdown который генерит Google Translate
+  const tryApply = (attempts) => {
+    const sel = document.querySelector('select.goog-te-combo');
+    if (sel) {
+      sel.value = lang === 'ru' ? '' : lang;
+      sel.dispatchEvent(new Event('change'));
+    } else if (attempts > 0) {
+      setTimeout(() => tryApply(attempts - 1), 300);
+    }
+  };
+  tryApply(10);
+}
 </script>
 
 </body>
