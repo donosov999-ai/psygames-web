@@ -259,21 +259,30 @@ footer a:hover { text-decoration: underline; }
   <p class="sub" data-i18n="dl_sub"></p>
 
   <div class="downloads">
-    <a class="dl-card mac" id="dl-mac" href="https://github.com/donosov999-ai/psygames-native/releases/latest">
+    <!-- v1.13.5: direct download URLs + download attribute → браузер ВСЕГДА скачивает,
+         не пытается открыть как preview. Имена файлов Mac/Android статичные;
+         Win имеет версию в имени (JS подменит после fetch GitHub API). -->
+    <a class="dl-card mac" id="dl-mac"
+       href="https://github.com/donosov999-ai/psygames-native/releases/latest/download/PsyGames-macos-arm64.tar.gz"
+       download="PsyGames-macos-arm64.tar.gz">
       <div class="icon">🍎</div>
       <h3>macOS</h3>
       <p class="desc" data-i18n="dl_mac_desc"></p>
       <span class="btn" data-i18n="dl_mac_btn"></span>
       <div class="meta" id="meta-mac">~5.6 MB</div>
     </a>
-    <a class="dl-card win" id="dl-win" href="https://github.com/donosov999-ai/psygames-native/releases/latest">
+    <a class="dl-card win" id="dl-win"
+       href="https://github.com/donosov999-ai/psygames-native/releases/latest"
+       download>
       <div class="icon">🪟</div>
       <h3>Windows</h3>
       <p class="desc" data-i18n="dl_win_desc"></p>
       <span class="btn" data-i18n="dl_win_btn"></span>
       <div class="meta" id="meta-win">~3.8 MB</div>
     </a>
-    <a class="dl-card android" id="dl-android" href="https://github.com/donosov999-ai/psygames-native/releases/latest">
+    <a class="dl-card android" id="dl-android"
+       href="https://github.com/donosov999-ai/psygames-native/releases/latest/download/PsyGames-android.apk"
+       download="PsyGames-android.apk">
       <div class="icon">🤖</div>
       <h3>Android</h3>
       <p class="desc" data-i18n="dl_android_desc"></p>
@@ -601,16 +610,24 @@ fetch('https://api.github.com/repos/donosov999-ai/psygames-native/releases/lates
     const macAsset = findAsset(/macos.*\.tar\.gz$/);
     const winExeAsset = findAsset(/setup\.exe$/);
     const apkAsset = findAsset(/\.apk$/);
+    // v1.13.5: подменяем href + сохраняем download attribute с конкретным
+    //          именем файла → браузер скачивает (не открывает preview).
     if (macAsset) {
-      document.getElementById('dl-mac').href = macAsset.browser_download_url;
+      const el = document.getElementById('dl-mac');
+      el.href = macAsset.browser_download_url;
+      el.setAttribute('download', macAsset.name);
       document.getElementById('meta-mac').textContent = formatSize(macAsset.size);
     }
     if (winExeAsset) {
-      document.getElementById('dl-win').href = winExeAsset.browser_download_url;
+      const el = document.getElementById('dl-win');
+      el.href = winExeAsset.browser_download_url;
+      el.setAttribute('download', winExeAsset.name);
       document.getElementById('meta-win').textContent = formatSize(winExeAsset.size);
     }
     if (apkAsset) {
-      document.getElementById('dl-android').href = apkAsset.browser_download_url;
+      const el = document.getElementById('dl-android');
+      el.href = apkAsset.browser_download_url;
+      el.setAttribute('download', apkAsset.name);
       document.getElementById('meta-android').textContent = formatSize(apkAsset.size);
     }
   })
